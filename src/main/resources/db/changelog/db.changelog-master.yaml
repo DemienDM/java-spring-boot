@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: /changes/001-add-todos-table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: /changes/002-add-task-history-table.sql
+      relativeToChangelogFile: true
