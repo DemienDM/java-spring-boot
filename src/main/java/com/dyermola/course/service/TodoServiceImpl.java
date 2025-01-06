@@ -8,6 +8,7 @@ import com.dyermola.course.dto.TodoResponseDto;
 import com.dyermola.course.dto.TodoUpdateDto;
 import com.dyermola.course.entity.TaskHistory;
 import com.dyermola.course.entity.Todo;
+import com.dyermola.course.exception.EntityNotFoundException;
 import com.dyermola.course.mapper.TodoMapper;
 import com.dyermola.course.type.TodoPriorityType;
 import com.dyermola.course.type.TodoStatusType;
@@ -31,11 +32,17 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoResponseDto save(TodoCreateDto todoCreateDto) {
         Todo todo = todoMapper.toEntity(todoCreateDto);
+        todo.setStatus(TodoStatusType.PENDING);
+        todo.setUserId(1L);
         return todoMapper.toDto(todoRepository.save(todo));
     }
 
     @Override
     public void deleteById(Long id) {
+        Optional<Todo> optionalTodo = todoRepository.findById(id);
+        if (optionalTodo.isEmpty()) {
+            throw new EntityNotFoundException("Todo with id: " + id + " not found.");
+        }
         todoRepository.deleteById(id);
     }
 
@@ -44,7 +51,7 @@ public class TodoServiceImpl implements TodoService {
     public TodoResponseDto updateById(Long id, TodoUpdateDto todoUpdateDto) {
         Optional<Todo> optionalTodo = todoRepository.findById(id);
         if (optionalTodo.isEmpty()) {
-            throw new RuntimeException("Todo with id: " + id + " not found.");
+            throw new EntityNotFoundException("Todo with id: " + id + " not found.");
         }
 
         Todo todo = optionalTodo.get();

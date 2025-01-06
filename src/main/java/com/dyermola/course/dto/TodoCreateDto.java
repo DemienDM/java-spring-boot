@@ -4,17 +4,17 @@ import com.dyermola.course.type.TodoPriorityType;
 import com.dyermola.course.validation.ValidEnum;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 public record TodoCreateDto(
         @NotEmpty
-        @Length(min = 3, max = 100)
+        @Size(min = 3, max = 100)
         String title,
 
-        @Length(min = 3, max = 500)
+        @Size(min = 3, max = 500)
         String description,
 
         @NotNull

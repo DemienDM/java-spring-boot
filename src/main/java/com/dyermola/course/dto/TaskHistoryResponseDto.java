@@ -8,6 +8,6 @@ public record TaskHistoryResponseDto(
         String oldState,
         String newState,
         LocalDateTime changeDate,
-        Long changedBy
+        String changedBy
 ) {
 }

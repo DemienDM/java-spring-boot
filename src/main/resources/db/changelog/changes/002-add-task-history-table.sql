@@ -8,7 +8,8 @@ CREATE TABLE java_course.task_history (
 	new_state TEXT NOT NULL,
 	change_date DATETIME NOT NULL,
 	changed_by varchar(100) NOT NULL,
-	CONSTRAINT task_history PRIMARY KEY (id)
+	CONSTRAINT task_history PRIMARY KEY (id),
+	FOREIGN KEY (todo) REFERENCES todos (id) ON DELETE CASCADE
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb3
