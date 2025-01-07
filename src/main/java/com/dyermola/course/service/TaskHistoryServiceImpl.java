@@ -26,6 +26,6 @@ public class TaskHistoryServiceImpl implements TaskHistoryService {
         return taskHistoryList
                 .stream()
                 .map(taskHistoryMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

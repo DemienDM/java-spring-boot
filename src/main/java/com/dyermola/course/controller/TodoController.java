@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -46,7 +47,9 @@ public class TodoController {
     }
 
     @GetMapping("/{id}/history")
-    public List<TaskHistoryResponseDto> findHistoryByTodoId(@PathVariable Long id) {
-        return taskHistoryService.findByTodoId(id, 10L);
+    public List<TaskHistoryResponseDto> findHistoryByTodoId(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "10") Long limit) {
+        return taskHistoryService.findByTodoId(id, limit);
     }
 }

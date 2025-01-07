@@ -1,11 +1,8 @@
 package com.dyermola.course.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-
 import java.time.LocalDateTime;
 
 public record TodoResponseDto(
-        @NotEmpty
         Long id,
         String title,
         String description,
